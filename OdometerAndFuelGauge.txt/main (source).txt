@@ -1,0 +1,67 @@
+// This program simulates a car's odometer and fuel gauge as it drives
+// Headers and Implementation of functions for classes are placed in separate files for legibility
+
+#include "Odometer.h"
+#include "FuelGauge.h"
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+
+int main()
+{
+    int fuelAmount;
+    int carMileage;
+    int carMPG = 24;
+
+    cout << "How much fuel does your car currently have in gallons?: ";
+    cin >> fuelAmount;
+
+
+    cout << "What is your vehicle's current odometer reading?: ";
+    cin >> carMileage;
+
+    // instantiates a fuel gauge and odometer object using user input
+    FuelGauge fuel(fuelAmount);
+    Odometer odometer(carMileage);
+
+    // input validation
+    while ((fuelAmount < fuel.minFuel) || (fuelAmount > fuel.maxFuel))
+    {
+        cout << "Invalid fuel amount, please re-enter fuel data: ";
+        cin >> fuelAmount;
+    }
+
+    while ((carMileage < odometer.minMileage) || (carMileage > odometer.maxMileage))
+    {
+        cout << "Invalid odometer reading, please re-enter odometer data: ";
+        cin >> carMileage;
+    }
+
+
+    // if there is gas in the tank, the fuel amount decrements
+    // and the odometer increments for each mile driven
+    while (fuel.current_fuel_reading() > fuel.minFuel)
+    {
+        for (int i = 0; i <= carMPG; i++)
+        {
+            odometer.increment_mileage();
+
+            if (i == carMPG)
+            {
+                fuel.decrement_fuel();
+            }
+
+            fuel.report_current_fuel();
+            odometer.report_car_mileage();
+
+            if (fuel.current_fuel_reading() <= fuel.minFuel)
+            {
+                cout << "*** TANK EMPTY! ***" << endl;
+            }
+        }
+    }
+
+    return 0;
+}
