@@ -1,0 +1,38 @@
+#include "Odometer.h"
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+
+
+Odometer::Odometer(int m)
+{
+    carCurrentMileage = m;
+}
+
+int Odometer::increment_mileage()
+{
+    if (carCurrentMileage <= maxMileage)
+    {
+        carCurrentMileage++;
+    }
+    // RESET
+    if (carCurrentMileage > maxMileage)
+    {
+        carCurrentMileage = minMileage;
+    }
+
+
+    return carCurrentMileage;
+}
+
+int Odometer::current_odometer_reading()
+{
+    return carCurrentMileage;
+}
+
+void Odometer::report_car_mileage()
+{
+    cout << "Vehicle currently has " << carCurrentMileage << " miles recorded." << endl << endl;
+}

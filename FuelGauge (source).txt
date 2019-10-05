@@ -1,0 +1,49 @@
+#include "FuelGauge.h"
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+
+
+FuelGauge::FuelGauge(int f)
+{
+    fuelAmountInGallons = f;
+}
+
+int FuelGauge::fill_tank()
+{
+    fuelAmountInGallons = maxFuel;
+
+    return fuelAmountInGallons;
+}
+
+int FuelGauge::increment_fuel()
+{
+    if ((fuelAmountInGallons >= minFuel) && (fuelAmountInGallons < maxFuel))
+    {
+        fuelAmountInGallons++;
+    }
+
+    return fuelAmountInGallons;
+}
+
+int FuelGauge::decrement_fuel()
+{
+    if ((fuelAmountInGallons > minFuel) && (fuelAmountInGallons <= maxFuel))
+    {
+        fuelAmountInGallons--;
+    }
+
+    return fuelAmountInGallons;
+}
+
+int FuelGauge::current_fuel_reading()
+{
+    return fuelAmountInGallons;
+}
+
+void FuelGauge::report_current_fuel()
+{
+    cout << endl << "Vehicle currently has " << fuelAmountInGallons << " gallons of fuel" << endl;
+}
